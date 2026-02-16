@@ -1,0 +1,233 @@
+/* =============================================
+   Login Page Specific Styles
+   Mannazentrum Daycare Management System
+   ============================================= */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FDF8E8 0%, #F9F3DC 100%);
+  padding: 24px;
+}
+
+.login-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 48px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 16px 48px rgba(139, 90, 43, 0.16);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+}
+
+.login-logo h1 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #C17817;
+  margin: 0;
+}
+
+.login-subtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2D2926;
+  margin-bottom: 4px;
+}
+
+.login-description {
+  font-size: 0.875rem;
+  color: #6B5E4A;
+  margin-bottom: 0;
+}
+
+.login-error {
+  background: #FEE2E2;
+  color: #EF4444;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Role Selector */
+.role-selector {
+  margin-bottom: 32px;
+}
+
+.role-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9B8B7A;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.role-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.role-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  background: #FDF8E8;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.role-btn:hover {
+  background: #F9F3DC;
+  border-color: #E8B86D;
+}
+
+.role-btn.active {
+  background: #C17817;
+  border-color: #C17817;
+  color: white;
+}
+
+.role-btn.active .role-name {
+  color: white;
+}
+
+.role-icon {
+  font-size: 1.5rem;
+}
+
+.role-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6B5E4A;
+  text-align: center;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6B5E4A;
+}
+
+.form-group input {
+  padding: 16px;
+  border: 2px solid #F9F3DC;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 150ms ease;
+  background: #FFFFFF;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #C17817;
+}
+
+.login-submit-btn {
+  padding: 16px 24px;
+  background: #C17817;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+  margin-top: 8px;
+}
+
+.login-submit-btn:hover:not(:disabled) {
+  background: #8B5A2B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 90, 43, 0.12);
+}
+
+.login-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Login Footer */
+.login-footer {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #F9F3DC;
+  text-align: center;
+}
+
+.login-footer p {
+  font-size: 0.75rem;
+  color: #9B8B7A;
+  margin-bottom: 8px;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+.credential-item {
+  background: #F9F3DC;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.credential-item code {
+  font-size: 0.7rem;
+  color: #6B5E4A;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+  
+  .role-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .credentials-grid {
+    grid-template-columns: 1fr;
+  }
+}

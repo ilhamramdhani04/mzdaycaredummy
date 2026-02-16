@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Alya", "ageGroup": "Toddler", "parentId": 3, "dateOfBirth": "2022-03-15" },
+  { "id": 2, "name": "Raka", "ageGroup": "Baby", "parentId": 3, "dateOfBirth": "2023-01-20" },
+  { "id": 3, "name": "Bima", "ageGroup": "Kinder", "parentId": 1, "dateOfBirth": "2021-06-10" },
+  { "id": 4, "name": "Cici", "ageGroup": "Toddler", "parentId": 1, "dateOfBirth": "2022-09-22" },
+  { "id": 5, "name": "Dimas", "ageGroup": "Nursery - Baby", "parentId": 1, "dateOfBirth": "2023-11-05" }
+]

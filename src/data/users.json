@@ -1,0 +1,5 @@
+[
+  { "id": 1, "username": "admin", "password": "password", "role": "superadmin", "displayName": "Administrator" },
+  { "id": 2, "username": "guru", "password": "password", "role": "guru", "displayName": "Guru / Teacher" },
+  { "id": 3, "username": "parent", "password": "password", "role": "orang tua", "displayName": "Parent / Orang Tua" }
+]

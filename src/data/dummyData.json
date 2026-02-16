@@ -1,0 +1,687 @@
+{
+  "users": [
+    { 
+      "id": "owner_1", 
+      "username": "owner", 
+      "password": "owner123", 
+      "role": "owner", 
+      "displayName": "Owner - Mannazentrum",
+      "email": "owner@mannazentrum.id",
+      "phone": "+62 812-3456-7890",
+      "branchId": null
+    },
+    { 
+      "id": "superadmin_1", 
+      "username": "superadmin", 
+      "password": "super123", 
+      "role": "superadmin", 
+      "displayName": "Super Admin",
+      "email": "superadmin@mannazentrum.id",
+      "phone": "+62 812-3456-7891",
+      "branchId": "branch_1"
+    },
+    { 
+      "id": "superadmin_2", 
+      "username": "superadmin2", 
+      "password": "super123", 
+      "role": "superadmin", 
+      "displayName": "Super Admin 2",
+      "email": "superadmin2@mannazentrum.id",
+      "phone": "+62 812-3456-7892",
+      "branchId": "branch_2"
+    },
+    { 
+      "id": "guru_1", 
+      "username": "guru1", 
+      "password": "guru123", 
+      "role": "guru", 
+      "displayName": "Ustadzah Aisyah",
+      "email": "aisyah@mannazentrum.id",
+      "phone": "+62 812-3456-7893",
+      "branchId": "branch_1",
+      "specialization": "Toddler & Baby"
+    },
+    { 
+      "id": "guru_2", 
+      "username": "guru2", 
+      "password": "guru123", 
+      "role": "guru", 
+      "displayName": "Ustadzah Fatimah",
+      "email": "fatimah@mannazentrum.id",
+      "phone": "+62 812-3456-7894",
+      "branchId": "branch_1",
+      "specialization": "Kinder & Playgroup"
+    },
+    { 
+      "id": "guru_3", 
+      "username": "guru3", 
+      "password": "guru123", 
+      "role": "guru", 
+      "displayName": "Ustadzah Khadijah",
+      "email": "khadijah@mannazentrum.id",
+      "phone": "+62 812-3456-7895",
+      "branchId": "branch_2",
+      "specialization": "All Ages"
+    },
+    { 
+      "id": "orangtua_1", 
+      "username": "bapak_ahmad", 
+      "password": "parent123", 
+      "role": "orangtua", 
+      "displayName": "Bapak Ahmad",
+      "email": "ahmad@gmail.com",
+      "phone": "+62 813-4567-8901",
+      "childIds": ["child_1", "child_2"]
+    },
+    { 
+      "id": "orangtua_2", 
+      "username": "ibu_siti", 
+      "password": "parent123", 
+      "role": "orangtua", 
+      "displayName": "Ibu Siti",
+      "email": "siti@gmail.com",
+      "phone": "+62 813-4567-8902",
+      "childIds": ["child_3"]
+    },
+    { 
+      "id": "orangtua_3", 
+      "username": "bapak_budi", 
+      "password": "parent123", 
+      "role": "orangtua", 
+      "displayName": "Bapak Budi",
+      "email": "budi@gmail.com",
+      "phone": "+62 813-4567-8903",
+      "childIds": ["child_4", "child_5"]
+    },
+    { 
+      "id": "orangtua_4", 
+      "username": "ibu_dewi", 
+      "password": "parent123", 
+      "role": "orangtua", 
+      "displayName": "Ibu Dewi",
+      "email": "dewi@gmail.com",
+      "phone": "+62 813-4567-8904",
+      "childIds": ["child_6"]
+    },
+    { 
+      "id": "orangtua_5", 
+      "username": "bapak_eko", 
+      "password": "parent123", 
+      "role": "orangtua", 
+      "displayName": "Bapak Eko",
+      "email": "eko@gmail.com",
+      "phone": "+62 813-4567-8905",
+      "childIds": ["child_7", "child_8"]
+    }
+  ],
+  "branches": [
+    {
+      "id": "branch_1",
+      "name": "Mannazentrum Pusat",
+      "address": "Jl. Mawar No. 123, Jakarta Selatan",
+      "phone": "+62 21-1234-5678",
+      "managerId": "superadmin_1",
+      "establishedDate": "2020-01-15"
+    },
+    {
+      "id": "branch_2",
+      "name": "Mannazentrum Cibubur",
+      "address": "Jl. Melati No. 456, Cibubur",
+      "phone": "+62 21-8765-4321",
+      "managerId": "superadmin_2",
+      "establishedDate": "2022-03-10"
+    }
+  ],
+  "packages": [
+    {
+      "id": "pkg_full",
+      "name": "Full Day",
+      "code": "FULL",
+      "maxMinutesPerDay": 600,
+      "monthlyPrice": 3500000,
+      "overtimeRatePerHour": 50000,
+      "description": "7:00 - 17:00, max 10 jam/hari"
+    },
+    {
+      "id": "pkg_half",
+      "name": "Half Day",
+      "code": "HALF",
+      "maxMinutesPerDay": 300,
+      "monthlyPrice": 2500000,
+      "overtimeRatePerHour": 50000,
+      "description": "7:00 - 12:00 atau 12:00 - 17:00, max 5 jam/hari"
+    },
+    {
+      "id": "pkg_extended",
+      "name": "Extended",
+      "code": "EXT",
+      "maxMinutesPerDay": 720,
+      "monthlyPrice": 4500000,
+      "overtimeRatePerHour": 75000,
+      "description": "6:00 - 18:00, max 12 jam/hari"
+    }
+  ],
+  "children": [
+    {
+      "id": "child_1",
+      "name": "Muhammad Aisyah Putra",
+      "nickname": "Aisy",
+      "dateOfBirth": "2022-03-15",
+      "ageGroup": "Toddler",
+      "parentId": "orangtua_1",
+      "branchId": "branch_1",
+      "packageId": "pkg_full",
+      "joinDate": "2023-06-01",
+      "status": "active",
+      "allergies": ["Kacang"],
+      "emergencyContact": "+62 813-9999-0001"
+    },
+    {
+      "id": "child_2",
+      "name": "Fatimah Khairunnisa",
+      "nickname": "Tima",
+      "dateOfBirth": "2023-01-20",
+      "ageGroup": "Baby",
+      "parentId": "orangtua_1",
+      "branchId": "branch_1",
+      "packageId": "pkg_half",
+      "joinDate": "2023-08-15",
+      "status": "active",
+      "allergies": [],
+      "emergencyContact": "+62 813-9999-0001"
+    },
+    {
+      "id": "child_3",
+      "name": "Ahmad Fadhil Rahman",
+      "nickname": "Fadhil",
+      "dateOfBirth": "2021-06-10",
+      "ageGroup": "Kinder",
+      "parentId": "orangtua_2",
+      "branchId": "branch_1",
+      "packageId": "pkg_full",
+      "joinDate": "2022-09-01",
+      "status": "active",
+      "allergies": ["Seafood"],
+      "emergencyContact": "+62 813-9999-0002"
+    },
+    {
+      "id": "child_4",
+      "name": "Siti Nurhaliza",
+      "nickname": "Icha",
+      "dateOfBirth": "2022-09-22",
+      "ageGroup": "Toddler",
+      "parentId": "orangtua_3",
+      "branchId": "branch_1",
+      "packageId": "pkg_full",
+      "joinDate": "2023-04-10",
+      "status": "active",
+      "allergies": [],
+      "emergencyContact": "+62 813-9999-0003"
+    },
+    {
+      "id": "child_5",
+      "name": "Bima Sakti Wijaya",
+      "nickname": "Bimbi",
+      "dateOfBirth": "2023-11-05",
+      "ageGroup": "Baby",
+      "parentId": "orangtua_3",
+      "branchId": "branch_1",
+      "packageId": "pkg_extended",
+      "joinDate": "2024-01-20",
+      "status": "active",
+      "allergies": ["Susu Sapi"],
+      "emergencyContact": "+62 813-9999-0003"
+    },
+    {
+      "id": "child_6",
+      "name": "Khadijah Al Zahra",
+      "nickname": "Zahra",
+      "dateOfBirth": "2021-12-01",
+      "ageGroup": "Kinder",
+      "parentId": "orangtua_4",
+      "branchId": "branch_2",
+      "packageId": "pkg_full",
+      "joinDate": "2022-06-15",
+      "status": "active",
+      "allergies": [],
+      "emergencyContact": "+62 813-9999-0004"
+    },
+    {
+      "id": "child_7",
+      "name": "Umar Bin Khattab",
+      "nickname": "Umar",
+      "dateOfBirth": "2022-07-18",
+      "ageGroup": "Toddler",
+      "parentId": "orangtua_5",
+      "branchId": "branch_2",
+      "packageId": "pkg_half",
+      "joinDate": "2023-09-01",
+      "status": "active",
+      "allergies": ["Telur"],
+      "emergencyContact": "+62 813-9999-0005"
+    },
+    {
+      "id": "child_8",
+      "name": "Ali Bin Abi Thalib",
+      "nickname": "Ali",
+      "dateOfBirth": "2023-04-25",
+      "ageGroup": "Baby",
+      "parentId": "orangtua_5",
+      "branchId": "branch_2",
+      "packageId": "pkg_full",
+      "joinDate": "2023-10-10",
+      "status": "active",
+      "allergies": [],
+      "emergencyContact": "+62 813-9999-0005"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "att_001",
+      "childId": "child_1",
+      "date": "2024-02-01",
+      "checkIn": "07:15",
+      "checkOut": "17:30",
+      "durationMinutes": 615,
+      "overtimeMinutes": 15,
+      "overtimeAmount": 12500,
+      "checkedInBy": "guru_1",
+      "checkedOutBy": "guru_1",
+      "notes": "Datang tepat waktu"
+    },
+    {
+      "id": "att_002",
+      "childId": "child_2",
+      "date": "2024-02-01",
+      "checkIn": "07:30",
+      "checkOut": "12:15",
+      "durationMinutes": 285,
+      "overtimeMinutes": 0,
+      "overtimeAmount": 0,
+      "checkedInBy": "guru_1",
+      "checkedOutBy": "guru_1",
+      "notes": ""
+    },
+    {
+      "id": "att_003",
+      "childId": "child_3",
+      "date": "2024-02-01",
+      "checkIn": "07:00",
+      "checkOut": "17:45",
+      "durationMinutes": 645,
+      "overtimeMinutes": 45,
+      "overtimeAmount": 37500,
+      "checkedInBy": "guru_2",
+      "checkedOutBy": "guru_2",
+      "notes": "Overtime karena orangtua terlambat"
+    },
+    {
+      "id": "att_004",
+      "childId": "child_1",
+      "date": "2024-02-02",
+      "checkIn": "07:45",
+      "checkOut": "17:00",
+      "durationMinutes": 555,
+      "overtimeMinutes": 0,
+      "overtimeAmount": 0,
+      "checkedInBy": "guru_1",
+      "checkedOutBy": "guru_1",
+      "notes": ""
+    },
+    {
+      "id": "att_005",
+      "childId": "child_4",
+      "date": "2024-02-01",
+      "checkIn": "06:30",
+      "checkOut": "18:15",
+      "durationMinutes": 705,
+      "overtimeMinutes": 105,
+      "overtimeAmount": 87500,
+      "checkedInBy": "guru_2",
+      "checkedOutBy": "guru_2",
+      "notes": "Extended package overtime"
+    },
+    {
+      "id": "att_006",
+      "childId": "child_6",
+      "date": "2024-02-01",
+      "checkIn": "07:10",
+      "checkOut": "16:30",
+      "durationMinutes": 560,
+      "overtimeMinutes": 0,
+      "overtimeAmount": 0,
+      "checkedInBy": "guru_3",
+      "checkedOutBy": "guru_3",
+      "notes": ""
+    },
+    {
+      "id": "att_007",
+      "childId": "child_7",
+      "date": "2024-02-01",
+      "checkIn": "08:00",
+      "checkOut": "13:00",
+      "durationMinutes": 300,
+      "overtimeMinutes": 0,
+      "overtimeAmount": 0,
+      "checkedInBy": "guru_3",
+      "checkedOutBy": "guru_3",
+      "notes": "Half day"
+    },
+    {
+      "id": "att_008",
+      "childId": "child_8",
+      "date": "2024-02-01",
+      "checkIn": "07:20",
+      "checkOut": "17:10",
+      "durationMinutes": 590,
+      "overtimeMinutes": 0,
+      "overtimeAmount": 0,
+      "checkedInBy": "guru_3",
+      "checkedOutBy": "guru_3",
+      "notes": ""
+    }
+  ],
+  "reports": [
+    {
+      "id": "rep_001",
+      "childId": "child_1",
+      "date": "2024-02-01",
+      "createdBy": "guru_1",
+      "status": "Final",
+      "lockedBy": "superadmin_1",
+      "lockedAt": "2024-02-01T18:30:00",
+      "general": {
+        "mood": "Happy",
+        "activities": "Main balok, menggambar, bernyanyi",
+        "notes": "Hari ini Aisy sangat aktif dan antusias dalam belajar"
+      },
+      "meals": [
+        { "time": "08:00", "menu": "Bubur ayam + susu", "amount": "Selesai", "notes": "" },
+        { "time": "12:00", "menu": "Nasi tim ikan + sayur", "amount": "Selesai", "notes": "" },
+        { "time": "15:00", "menu": "Buah potong + biskuit", "amount": "Selesai", "notes": "" }
+      ],
+      "nap": {
+        "startTime": "13:00",
+        "endTime": "14:30",
+        "durationMinutes": 90,
+        "quality": "Good"
+      },
+      "toilet": [
+        { "time": "09:30", "type": "Pipis", "notes": "" },
+        { "time": "14:45", "type": "Pipis", "notes": "" }
+      ],
+      "photos": [
+        { "id": "photo_001", "url": "https://picsum.photos/400/300?random=1", "caption": "Aisy sedang menggambar", "time": "10:30" },
+        { "id": "photo_002", "url": "https://picsum.photos/400/300?random=2", "caption": "Bermain dengan teman", "time": "11:00" }
+      ]
+    },
+    {
+      "id": "rep_002",
+      "childId": "child_2",
+      "date": "2024-02-01",
+      "createdBy": "guru_1",
+      "status": "Final",
+      "lockedBy": "superadmin_1",
+      "lockedAt": "2024-02-01T18:30:00",
+      "general": {
+        "mood": "Calm",
+        "activities": "Bermain bola, mendengarkan cerita",
+        "notes": "Tima hari ini lebih tenang"
+      },
+      "meals": [
+        { "time": "08:30", "menu": "MPASI bubur + susu", "amount": "Selesai", "notes": "" },
+        { "time": "11:30", "menu": "Puree buah", "amount": "Selesai", "notes": "" }
+      ],
+      "nap": {
+        "startTime": "09:30",
+        "endTime": "11:00",
+        "durationMinutes": 90,
+        "quality": "Good"
+      },
+      "toilet": [
+        { "time": "10:00", "type": "Pipis", "notes": "" }
+      ],
+      "photos": [
+        { "id": "photo_003", "url": "https://picsum.photos/400/300?random=3", "caption": "Tima bermain", "time": "10:00" }
+      ]
+    },
+    {
+      "id": "rep_003",
+      "childId": "child_3",
+      "date": "2024-02-01",
+      "createdBy": "guru_2",
+      "status": "Draft",
+      "lockedBy": null,
+      "lockedAt": null,
+      "general": {
+        "mood": "Happy",
+        "activities": "Belajar huruf, mewarnai, puzzle",
+        "notes": "Fadhil menunjukkan kemajuan dalam mengenal huruf"
+      },
+      "meals": [
+        { "time": "08:00", "menu": "Nasi goreng + susu", "amount": "Selesai", "notes": "" },
+        { "time": "12:00", "menu": "Nasi + ayam goreng + sayur", "amount": "Selesai", "notes": "" },
+        { "time": "15:00", "menu": "Snack dan jus", "amount": "Selesai", "notes": "" }
+      ],
+      "nap": {
+        "startTime": "13:00",
+        "endTime": "14:00",
+        "durationMinutes": 60,
+        "quality": "Fair"
+      },
+      "toilet": [
+        { "time": "08:30", "type": "Pipis", "notes": "" },
+        { "time": "14:30", "type": "Poop", "notes": "" }
+      ],
+      "photos": [
+        { "id": "photo_004", "url": "https://picsum.photos/400/300?random=4", "caption": "Fadhil belajar huruf", "time": "09:00" }
+      ]
+    },
+    {
+      "id": "rep_004",
+      "childId": "child_4",
+      "date": "2024-02-01",
+      "createdBy": "guru_2",
+      "status": "Draft",
+      "lockedBy": null,
+      "lockedAt": null,
+      "general": {
+        "mood": "Happy",
+        "activities": "Bermain pasir, menggambar",
+        "notes": "Icha sangat kreatif hari ini"
+      },
+      "meals": [
+        { "time": "08:00", "menu": "Bubur + telur", "amount": "Selesai", "notes": "" },
+        { "time": "12:00", "menu": "Nasi tim + sup", "amount": "Selesai", "notes": "" }
+      ],
+      "nap": {
+        "startTime": "13:00",
+        "endTime": "14:30",
+        "durationMinutes": 90,
+        "quality": "Good"
+      },
+      "toilet": [
+        { "time": "10:00", "type": "Poop", "notes": "" }
+      ],
+      "photos": [
+        { "id": "photo_005", "url": "https://picsum.photos/400/300?random=5", "caption": "Icha menggambar", "time": "10:30" }
+      ]
+    },
+    {
+      "id": "rep_005",
+      "childId": "child_5",
+      "date": "2024-02-01",
+      "createdBy": "guru_2",
+      "status": "Draft",
+      "lockedBy": null,
+      "lockedAt": null,
+      "general": {
+        "mood": "Sleepy",
+        "activities": "Tummy time, main boneka",
+        "notes": "Bimbi masih menyesuaikan diri"
+      },
+      "meals": [
+        { "time": "08:00", "menu": "ASI/Susu formula", "amount": "150ml", "notes": "" },
+        { "time": "11:00", "menu": "ASI/Susu formula", "amount": "120ml", "notes": "" },
+        { "time": "14:00", "menu": "ASI/Susu formula", "amount": "150ml", "notes": "" }
+      ],
+      "nap": {
+        "startTime": "09:00",
+        "endTime": "11:00",
+        "durationMinutes": 120,
+        "quality": "Good"
+      },
+      "toilet": [
+        { "time": "10:00", "type": "Poop", "notes": "" }
+      ],
+      "photos": [
+        { "id": "photo_006", "url": "https://picsum.photos/400/300?random=6", "caption": "Bimbi tummy time", "time": "09:30" }
+      ]
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv_001",
+      "childId": "child_1",
+      "parentId": "orangtua_1",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 3500000,
+      "overtimeAmount": 137500,
+      "totalAmount": 3637500,
+      "overtimeDetails": [
+        { "date": "2024-02-01", "minutes": 15, "amount": 12500 },
+        { "date": "2024-02-05", "minutes": 30, "amount": 25000 },
+        { "date": "2024-02-10", "minutes": 60, "amount": 50000 },
+        { "date": "2024-02-15", "minutes": 45, "amount": 37500 },
+        { "date": "2024-02-20", "minutes": 30, "amount": 25000 }
+      ],
+      "status": "Approved",
+      "approvedBy": "owner_1",
+      "approvedAt": "2024-02-25T10:00:00",
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    },
+    {
+      "id": "inv_002",
+      "childId": "child_2",
+      "parentId": "orangtua_1",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 2500000,
+      "overtimeAmount": 0,
+      "totalAmount": 2500000,
+      "overtimeDetails": [],
+      "status": "Approved",
+      "approvedBy": "owner_1",
+      "approvedAt": "2024-02-25T10:00:00",
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    },
+    {
+      "id": "inv_003",
+      "childId": "child_3",
+      "parentId": "orangtua_2",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 3500000,
+      "overtimeAmount": 187500,
+      "totalAmount": 3687500,
+      "overtimeDetails": [
+        { "date": "2024-02-01", "minutes": 45, "amount": 37500 },
+        { "date": "2024-02-08", "minutes": 60, "amount": 50000 },
+        { "date": "2024-02-15", "minutes": 90, "amount": 75000 },
+        { "date": "2024-02-22", "minutes": 30, "amount": 25000 }
+      ],
+      "status": "Draft",
+      "approvedBy": null,
+      "approvedAt": null,
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    },
+    {
+      "id": "inv_004",
+      "childId": "child_4",
+      "parentId": "orangtua_3",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 3500000,
+      "overtimeAmount": 87500,
+      "totalAmount": 3587500,
+      "overtimeDetails": [
+        { "date": "2024-02-01", "minutes": 105, "amount": 87500 }
+      ],
+      "status": "Draft",
+      "approvedBy": null,
+      "approvedAt": null,
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    },
+    {
+      "id": "inv_005",
+      "childId": "child_5",
+      "parentId": "orangtua_3",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 4500000,
+      "overtimeAmount": 0,
+      "totalAmount": 4500000,
+      "overtimeDetails": [],
+      "status": "Draft",
+      "approvedBy": null,
+      "approvedAt": null,
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    },
+    {
+      "id": "inv_006",
+      "childId": "child_6",
+      "parentId": "orangtua_4",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 3500000,
+      "overtimeAmount": 0,
+      "totalAmount": 3500000,
+      "overtimeDetails": [],
+      "status": "Approved",
+      "approvedBy": "owner_1",
+      "approvedAt": "2024-02-20T14:00:00",
+      "dueDate": "2024-02-28",
+      "paidAt": "2024-02-25T09:00:00"
+    },
+    {
+      "id": "inv_007",
+      "childId": "child_7",
+      "parentId": "orangtua_5",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 2500000,
+      "overtimeAmount": 0,
+      "totalAmount": 2500000,
+      "overtimeDetails": [],
+      "status": "Draft",
+      "approvedBy": null,
+      "approvedAt": null,
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    },
+    {
+      "id": "inv_008",
+      "childId": "child_8",
+      "parentId": "orangtua_5",
+      "month": 2,
+      "year": 2024,
+      "baseAmount": 3500000,
+      "overtimeAmount": 50000,
+      "totalAmount": 3550000,
+      "overtimeDetails": [
+        { "date": "2024-02-03", "minutes": 60, "amount": 50000 }
+      ],
+      "status": "Approved",
+      "approvedBy": "owner_1",
+      "approvedAt": "2024-02-25T10:00:00",
+      "dueDate": "2024-02-28",
+      "paidAt": null
+    }
+  ]
+}
