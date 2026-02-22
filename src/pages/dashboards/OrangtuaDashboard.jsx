@@ -4,6 +4,7 @@ import { useAttendance, useReports, useInvoices } from '../../hooks/useData.js'
 import { getChildrenByParent, calculateAge } from '../../utils/dataHelpers.js'
 import { formatDuration, formatOvertime } from '../../utils/attendance.js'
 import { formatCurrency } from '../../utils/invoice.js'
+import { WhatsAppButton } from '../../components/common'
 
 /**
  * Orangtua Dashboard - Parent Panel
@@ -89,6 +90,11 @@ function OrangtuaDashboard() {
 
   return (
     <div className="orangtua-dashboard animate-fade-in">
+      <WhatsAppButton 
+        phoneNumber="+6281234567890"
+        defaultMessage={`Halo Mannazentrum, saya ingin bertanya tentang ${selectedChildData?.name || 'anak saya'}...`}
+      />
+      
       {/* Warm Welcome Header */}
       <div className="orangtua-header">
         <div className="orangtua-welcome">

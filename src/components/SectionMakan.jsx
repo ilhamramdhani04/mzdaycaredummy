@@ -123,5 +123,5 @@ function SectionMakan({ data, onChange, isReadOnly }) {
     </div>
   )
 }
-
+          
 export default SectionMakan

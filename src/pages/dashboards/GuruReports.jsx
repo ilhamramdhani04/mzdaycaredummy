@@ -152,8 +152,30 @@ function GuruReports() {
     return moods[mood] || '😐'
   }
 
+  // Calculate progress
+  const completedCount = stats.final + stats.draft
+  const progressPercent = stats.total > 0 ? Math.round((completedCount / stats.total) * 100) : 0
+
   return (
     <div className="reports-page animate-fade-in">
+      {/* FAB for Mobile - Quick Actions */}
+      <div className="mobile-fab">
+        <button 
+          className="fab-btn"
+          onClick={() => {
+            if (stats.pending > 0) {
+              setQuickMode(true)
+              selectAllChildren()
+            } else {
+              alert('Semua laporan sudah dibuat!')
+            }
+          }}
+          title="Buat Laporan Cepat"
+        >
+          ⚡
+        </button>
+      </div>
+
       <div className="page-header">
         <div className="header-content">
           <h1 className="page-title">📝 Laporan Harian</h1>
@@ -170,6 +192,17 @@ function GuruReports() {
             }}
             className="form-input"
           />
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="progress-section">
+        <div className="progress-info">
+          <span className="progress-label">📊 Progres Laporan</span>
+          <span className="progress-count">{completedCount}/{stats.total} ({progressPercent}%)</span>
+        </div>
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
       </div>
 
@@ -424,7 +457,36 @@ function ReportDetail({ child, report, date, canEdit, onSave, onLock, getMoodEmo
   const isFinal = report?.status === 'Final'
   const isLocked = isFinal
 
+  const validateForm = () => {
+    const errors = []
+    
+    // Check meals - if consumption is 'None', reason is required
+    formData.meals.forEach((meal, idx) => {
+      if (meal.consumption === 'None' && !meal.reason?.trim()) {
+        errors.push(`${meal.type}: Alasan wajib diisi`)
+      }
+    })
+    
+    // Check nap - if not done, reason is required
+    if (formData.nap.isDone === false && !formData.nap.reason?.trim()) {
+      errors.push('Tidur Siang: Alasan wajib diisi')
+    }
+    
+    // Check toilet - if not done, reason is required
+    if (formData.toilet.length > 0 && formData.toilet[0].isDone === false && !formData.toilet[0].reason?.trim()) {
+      errors.push('Toilet: Alasan wajib diisi')
+    }
+    
+    return errors
+  }
+
   const handleSave = async () => {
+    const errors = validateForm()
+    if (errors.length > 0) {
+      alert('Mohon isi alasan:\n\n' + errors.join('\n'))
+      return
+    }
+    
     setSaving(true)
     await new Promise(r => setTimeout(r, 500))
     onSave(child.id, formData)
@@ -717,18 +779,45 @@ function ReportDetail({ child, report, date, canEdit, onSave, onLock, getMoodEmo
                   {consumptionOptions.map(opt => (
                     <button
                       key={opt.value}
-                      className={`consumption-pill ${meal.consumption === opt.value ? 'active' : ''}`}
+                      className={`consumption-pill ${meal.consumption === opt.value ? 'active' : ''} ${opt.value === 'None' ? 'not-done' : ''}`}
                       onClick={() => {
                         const newMeals = [...formData.meals]
-                        newMeals[idx] = { ...meal, consumption: opt.value }
+                        newMeals[idx] = { 
+                          ...meal, 
+                          consumption: opt.value,
+                          isDone: opt.value !== 'None',
+                          reason: opt.value === 'None' ? (meal.reason || '') : ''
+                        }
                         updateFormData('meals', newMeals)
                       }}
                       disabled={isLocked}
                     >
-                      {opt.label}
+                      {opt.value === 'None' ? '❌' : opt.value === 'All' ? '✅' : opt.value === 'Most' ? '🔶' : '🔴'} {opt.label}
                     </button>
                   ))}
                 </div>
+
+                {/* Reason field when activity not done */}
+                {meal.consumption === 'None' && (
+                  <div className="reason-field animate-fade-in">
+                    <label className="reason-label">
+                      <span className="reason-icon">📝</span>
+                      Alasan mengapa aktivitas tidak dilakukan:
+                    </label>
+                    <textarea
+                      className="form-input reason-input"
+                      value={meal.reason || ''}
+                      onChange={(e) => {
+                        const newMeals = [...formData.meals]
+                        newMeals[idx] = { ...meal, reason: e.target.value }
+                        updateFormData('meals', newMeals)
+                      }}
+                      placeholder="Contoh: Anak sedang sakit, Tidak nafsu makan, dll..."
+                      rows={2}
+                      disabled={isLocked}
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -764,41 +853,154 @@ function ReportDetail({ child, report, date, canEdit, onSave, onLock, getMoodEmo
                 {qualityOptions.map(q => (
                   <button
                     key={q}
-                    className={`quality-pill ${formData.nap.quality === q ? 'active' : ''}`}
-                    onClick={() => updateFormData('nap', { ...formData.nap, quality: q })}
-                    disabled={isLocked}
+                    className={`quality-pill ${formData.nap.quality === q ? 'active' : ''} ${formData.nap.isDone === false ? 'disabled' : ''}`}
+                    onClick={() => updateFormData('nap', { ...formData.nap, quality: q, isDone: true })}
+                    disabled={isLocked || formData.nap.isDone === false}
                   >
                     {q === 'Good' ? '😴 Baik' : q === 'Fair' ? '😐 Cukup' : '😫 Kurang'}
                   </button>
                 ))}
               </div>
             </div>
+
+            {/* Toggle for "Tidak Tidur" */}
+            <div className="not-done-toggle">
+              <label className="toggle-label">
+                <input
+                  type="checkbox"
+                  checked={formData.nap.isDone === false}
+                  onChange={(e) => {
+                    updateFormData('nap', { 
+                      ...formData.nap, 
+                      isDone: !e.target.checked,
+                      startTime: e.target.checked ? '' : formData.nap.startTime,
+                      endTime: e.target.checked ? '' : formData.nap.endTime,
+                      quality: e.target.checked ? '' : formData.nap.quality,
+                      reason: e.target.checked ? (formData.nap.reason || '') : ''
+                    })
+                  }}
+                  disabled={isLocked}
+                />
+                <span className="toggle-switch"></span>
+                <span className="toggle-text">❌ Anak tidak tidur siang</span>
+              </label>
+            </div>
+
+            {/* Reason field when nap not done */}
+            {formData.nap.isDone === false && (
+              <div className="reason-field animate-fade-in">
+                <label className="reason-label">
+                  <span className="reason-icon">📝</span>
+                  Alasan mengapa tidak tidur:
+                </label>
+                <textarea
+                  className="form-input reason-input"
+                  value={formData.nap.reason || ''}
+                  onChange={(e) => updateFormData('nap', { ...formData.nap, reason: e.target.value })}
+                  placeholder="Contoh: Anak tidak tidur di rumah, Sudah tidur sebelum berangkat, dll..."
+                  rows={2}
+                  disabled={isLocked}
+                />
+              </div>
+            )}
           </div>
         )}
 
         {activeSection === 'toilet' && (
           <div className="form-section">
-            <div className="toilet-list">
-              {formData.toilet.map((t, idx) => (
-                <div key={idx} className="toilet-item">
-                  <input type="time" className="form-input" value={t.time} disabled={isLocked} />
-                  <select className="form-select" value={t.type} disabled={isLocked}>
-                    <option value="Wet">💧 Pipis</option>
-                    <option value="Dry">✅ Kering</option>
-                    <option value="Poop">💩 Pup</option>
-                  </select>
-                </div>
-              ))}
+            {/* Toggle for "Tidak ada aktivitas toilet" */}
+            <div className="not-done-toggle">
+              <label className="toggle-label">
+                <input
+                  type="checkbox"
+                  checked={formData.toilet.length === 0 ? false : formData.toilet[0]?.isDone === false}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      updateFormData('toilet', [{ time: '', type: '', isDone: false, reason: '' }])
+                    } else {
+                      updateFormData('toilet', [{ time: '', type: 'Wet', isDone: true, reason: '' }])
+                    }
+                  }}
+                  disabled={isLocked}
+                />
+                <span className="toggle-switch"></span>
+                <span className="toggle-text">❌ Tidak ada aktivitas toilet hari ini</span>
+              </label>
             </div>
-            {!isLocked && (
+
+            {/* Reason field when no toilet activity */}
+            {formData.toilet.length > 0 && formData.toilet[0]?.isDone === false ? (
+              <div className="reason-field animate-fade-in">
+                <label className="reason-label">
+                  <span className="reason-icon">📝</span>
+                  Alasan mengapa tidak ada aktivitas toilet:
+                </label>
+                <textarea
+                  className="form-input reason-input"
+                  value={formData.toilet[0]?.reason || ''}
+                  onChange={(e) => {
+                    const newToilet = [...formData.toilet]
+                    newToilet[0] = { ...newToilet[0], reason: e.target.value }
+                    updateFormData('toilet', newToilet)
+                  }}
+                  placeholder="Contoh: Anak popok penuh, Baru diganti di rumah, dll..."
+                  rows={2}
+                  disabled={isLocked}
+                />
+              </div>
+            ) : (
+              <div className="toilet-list">
+                {formData.toilet.map((t, idx) => (
+                  <div key={idx} className="toilet-item">
+                    <input 
+                      type="time" 
+                      className="form-input" 
+                      value={t.time} 
+                      onChange={(e) => {
+                        const newToilet = [...formData.toilet]
+                        newToilet[idx] = { ...t, time: e.target.value }
+                        updateFormData('toilet', newToilet)
+                      }}
+                      disabled={isLocked} 
+                    />
+                    <select 
+                      className="form-select" 
+                      value={t.type} 
+                      onChange={(e) => {
+                        const newToilet = [...formData.toilet]
+                        newToilet[idx] = { ...t, type: e.target.value }
+                        updateFormData('toilet', newToilet)
+                      }}
+                      disabled={isLocked}
+                    >
+                      <option value="Wet">💧 Pipis</option>
+                      <option value="Dry">✅ Kering</option>
+                      <option value="Poop">💩 Pup</option>
+                    </select>
+                    <button 
+                      className="btn-remove"
+                      onClick={() => {
+                        const newToilet = formData.toilet.filter((_, i) => i !== idx)
+                        updateFormData('toilet', newToilet)
+                      }}
+                      disabled={isLocked}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {!isLocked && (!formData.toilet[0] || formData.toilet[0]?.isDone !== false) && (
               <button 
                 className="btn btn-secondary"
                 onClick={() => {
-                  const newToilet = [...formData.toilet, { time: '', type: 'Wet', notes: '' }]
+                  const newToilet = [...formData.toilet, { time: '', type: 'Wet', isDone: true, notes: '' }]
                   updateFormData('toilet', newToilet)
                 }}
               >
-                + Tambah
+                + Tambah Aktivitas Toilet
               </button>
             )}
           </div>

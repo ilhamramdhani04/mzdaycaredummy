@@ -655,6 +655,11 @@
 
 /* Responsive Adjustments */
 @media (max-width: 640px) {
+  .orangtua-dashboard {
+    padding: 16px;
+    padding-bottom: 100px;
+  }
+
   .orangtua-header {
     flex-direction: column;
     gap: var(--spacing-md);
@@ -677,4 +682,40 @@
   .quick-stats-grid {
     grid-template-columns: 1fr;
   }
+
+  .child-selector {
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .child-pill {
+    flex-shrink: 0;
+  }
+
+  .report-card {
+    padding: 16px;
+  }
+
+  .report-item {
+    padding: 12px;
+  }
+
+  .gallery-scroll {
+    padding-bottom: 8px;
+  }
+
+  .gallery-item {
+    width: 100px;
+    height: 100px;
+  }
+
+  .invoice-mini-card {
+    padding: 12px;
+  }
+
+  .empty-state-card {
+    padding: 32px 16px;
+  }
+}
 }

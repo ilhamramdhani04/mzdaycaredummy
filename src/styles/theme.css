@@ -1199,7 +1199,7 @@ body {
   position: fixed;
   top: var(--spacing-md);
   left: var(--spacing-md);
-  z-index: 90;
+  z-index: 1000;
   width: 44px;
   height: 44px;
   background: var(--color-bg-card);
@@ -1240,6 +1240,14 @@ body {
   border-top: 1px solid var(--color-bg-secondary);
   z-index: 100;
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bottom-nav-item.logout-item {
+  color: #EF4444;
+}
+
+.bottom-nav-item.logout-item:active {
+  background: #FEE2E2;
 }
 
 @media (max-width: 1024px) {
